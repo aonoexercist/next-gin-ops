@@ -4,7 +4,7 @@ services:
     expose:
       - "3000"
     env_file:
-      - .env.frontend
+      - .env
     restart: always
 
   backend:
@@ -18,7 +18,7 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
     env_file:
-      - .env.backend
+      - .env
     depends_on:
       - db
 
@@ -29,6 +29,8 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
+    env_file:
+      - .env
     volumes:
       - db_data:/var/lib/postgresql/data
     expose:
