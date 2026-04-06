@@ -2,7 +2,9 @@ services:
   frontend:
     image: ghcr.io/aonoexercist/next-gin-frontend:latest
     expose:
-      - "3000" # Internal only, Nginx can see it, the internet cannot.
+      - "3000"
+    env_file:
+      - .env.frontend
     restart: always
 
   backend:
@@ -11,7 +13,26 @@ services:
       - "8080"
     restart: always
     environment:
-      - DB_URL=${DB_URL} # Use a variable from a .env file for security
+      DB_HOST: db
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    env_file:
+      - .env.backend
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine # Or mysql:8.0
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    expose:
+      - "5432"
 
   nginx:
     image: nginx:alpine
@@ -24,3 +45,6 @@ services:
       - frontend
       - backend
     restart: always
+
+volumes:
+  db_data: # This ensures your database data isn't lost when the container stops
