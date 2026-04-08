@@ -39,6 +39,7 @@ services:
       - VIRTUAL_HOST=xercisdev.theworkpc.com
       - VIRTUAL_PORT=3000
       - LETSENCRYPT_HOST=xercisdev.theworkpc.com
+      - NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
     env_file:
       - .env
     restart: always
