@@ -17,13 +17,16 @@ services:
   ssl-companion:
     image: nginxproxy/acme-companion
     container_name: ssl-companion
+    volumes_from:
+      - nginx-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - certs:/etc/nginx/certs
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
     environment:
-      - DEFAULT_EMAIL=your-email@example.com # Replace with your email
+      - DEFAULT_EMAIL=xercis.silao@ustp.edu.ph # Replace with your email
+      - NGINX_PROXY_CONTAINER=nginx-proxy
     depends_on:
       - nginx-proxy
     restart: always
