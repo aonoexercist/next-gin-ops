@@ -33,6 +33,7 @@ services:
 
   frontend:
     image: ghcr.io/aonoexercist/next-gin-frontend:latest
+    container_name: frontend
     expose:
       - "3000"
     environment:
@@ -46,6 +47,7 @@ services:
 
   backend:
     image: ghcr.io/aonoexercist/gin-api-backend:latest
+    container_name: backend
     expose:
       - "8080"
     environment:
