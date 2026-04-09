@@ -11,7 +11,6 @@ services:
       - certs:/etc/nginx/certs
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
-      - acme:/etc/acme.sh
     restart: always
     networks:
       - app-network
@@ -20,13 +19,12 @@ services:
   ssl-companion:
     image: nginxproxy/acme-companion
     container_name: ssl-companion
-    volumes_from:
-      - nginx-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - certs:/etc/nginx/certs
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
     environment:
       - DEFAULT_EMAIL=xercis.silao@ustp.edu.ph
       - NGINX_PROXY_CONTAINER=nginx-proxy
