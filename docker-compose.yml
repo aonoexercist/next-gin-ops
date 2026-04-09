@@ -42,7 +42,7 @@ services:
     environment:
       - VIRTUAL_HOST=xercisdev.theworkpc.com
       - VIRTUAL_PORT=3000
-      # - LETSENCRYPT_HOST=xercisdev.theworkpc.com
+      - LETSENCRYPT_HOST=xercisdev.theworkpc.com
       - NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
     env_file:
       - .env
@@ -58,7 +58,7 @@ services:
     environment:
       - VIRTUAL_HOST=api-xercisdev.theworkpc.com
       - VIRTUAL_PORT=8080
-      # - LETSENCRYPT_HOST=api-xercisdev.theworkpc.com
+      - LETSENCRYPT_HOST=api-xercisdev.theworkpc.com
       - DB_HOST=db
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
