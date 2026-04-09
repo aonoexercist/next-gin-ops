@@ -7,11 +7,11 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - acme:/etc/acme.sh
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - certs:/etc/nginx/certs
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
     restart: always
     networks:
       - app-network
@@ -99,3 +99,4 @@ volumes:
   certs:
   vhost:
   html:
+  acme:
