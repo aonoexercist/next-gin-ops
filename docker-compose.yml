@@ -72,29 +72,11 @@ services:
     networks:
       - app-network
 
-  db:
-    image: postgres:15-alpine
-    container_name: db
-    restart: always
-    environment:
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - POSTGRES_DB=${DB_NAME}
-    env_file:
-      - .env
-    volumes:
-      - db_data:/var/lib/postgresql/data
-    expose:
-      - "5432"
-    networks:
-      - app-network
-
 networks:
   app-network:
     driver: bridge
 
 volumes:
-  db_data:
   certs:
   vhost:
   html:
