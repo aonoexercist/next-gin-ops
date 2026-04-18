@@ -35,7 +35,7 @@ services:
       - VIRTUAL_HOST=api-xercisdev.theworkpc.com
       - LETSENCRYPT_HOST=api-xercisdev.theworkpc.com
       - VIRTUAL_PORT=8080
-      - DB_HOST=10.0.0.248 # VM 3 Private IP
+      - DB_HOST=${DB_HOST} # VM 3 Private IP
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
