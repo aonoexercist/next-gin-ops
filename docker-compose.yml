@@ -40,7 +40,7 @@ services:
       - API_URL=${API_URL}
       - NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
     env_file:
-      - .env.fe
+      - .env
     restart: always
 
   backend:
@@ -58,7 +58,7 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_PORT=${DB_PORT}
     env_file:
-      - .env.be
+      - .env
     restart: always
 
 volumes:
