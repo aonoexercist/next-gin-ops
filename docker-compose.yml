@@ -1,5 +1,4 @@
 services:
-  # THE REVERSE PROXY: Handles incoming traffic and routes to containers
   nginx-proxy:
     image: nginxproxy/nginx-proxy
     container_name: nginx-proxy
@@ -12,10 +11,7 @@ services:
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
     restart: always
-    networks:
-      - app-network
 
-  # THE SSL HELPER: Automatically gets certificates from Let's Encrypt
   ssl-companion:
     image: nginxproxy/acme-companion
     container_name: ssl-companion
@@ -31,8 +27,6 @@ services:
     depends_on:
       - nginx-proxy
     restart: always
-    networks:
-      - app-network
 
   frontend:
     image: ghcr.io/aonoexercist/next-gin-frontend:latest
@@ -46,10 +40,8 @@ services:
       - API_URL=${API_URL}
       - NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
     env_file:
-      - .env
+      - .env.fe
     restart: always
-    networks:
-      - app-network
 
   backend:
     image: ghcr.io/aonoexercist/gin-api-backend:latest
@@ -60,21 +52,14 @@ services:
       - VIRTUAL_HOST=api-xercisdev.theworkpc.com
       - VIRTUAL_PORT=8080
       - LETSENCRYPT_HOST=api-xercisdev.theworkpc.com
-      - DB_HOST=db
+      - DB_HOST=${DB_HOST}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
+      - DB_PORT=${DB_PORT}
     env_file:
-      - .env
+      - .env.be
     restart: always
-    depends_on:
-      - db
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
 
 volumes:
   certs:
