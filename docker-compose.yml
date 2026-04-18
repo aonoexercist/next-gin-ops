@@ -24,23 +24,6 @@ services:
     environment:
       - DEFAULT_EMAIL=xercis.silao@ustp.edu.ph
       - NGINX_PROXY_CONTAINER=nginx-proxy
-    depends_on:
-      - nginx-proxy
-    restart: always
-
-  frontend:
-    image: ghcr.io/aonoexercist/next-gin-frontend:latest
-    container_name: frontend
-    expose:
-      - "3000"
-    environment:
-      - VIRTUAL_HOST=xercisdev.theworkpc.com
-      - VIRTUAL_PORT=3000
-      - LETSENCRYPT_HOST=xercisdev.theworkpc.com
-      - API_URL=${API_URL}
-      - NEXT_PUBLIC_GOOGLE_CLIENT_ID=${NEXT_PUBLIC_GOOGLE_CLIENT_ID}
-    env_file:
-      - .env
     restart: always
 
   backend:
@@ -50,19 +33,17 @@ services:
       - "8080"
     environment:
       - VIRTUAL_HOST=api-xercisdev.theworkpc.com
-      - VIRTUAL_PORT=8080
       - LETSENCRYPT_HOST=api-xercisdev.theworkpc.com
-      - DB_HOST=${DB_HOST}
+      - VIRTUAL_PORT=8080
+      - DB_HOST=10.0.0.248 # VM 3 Private IP
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
-      - DB_PORT=${DB_PORT}
-    env_file:
-      - .env
+    env_file: .env
     restart: always
 
-volumes:
-  certs:
-  vhost:
-  html:
-  acme:
+volumes: 
+  certs: 
+  vhost: 
+  html: 
+  acme: 
