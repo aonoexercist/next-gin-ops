@@ -34,7 +34,7 @@ services:
       - VIRTUAL_HOST=xercisdev.theworkpc.com
       - LETSENCRYPT_HOST=xercisdev.theworkpc.com
       - VIRTUAL_PORT=3000
-      - API_URL=https://api-xercisdev.theworkpc.com
+      - API_URL=${API_URL}
     env_file: .env
     restart: always
 
