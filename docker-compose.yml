@@ -38,6 +38,19 @@ services:
     env_file: .env
     restart: always
 
+  backend-proxy:
+    image: nginx:alpine
+    container_name: backend-proxy
+    environment:
+      - VIRTUAL_HOST=api-xercisdev.theworkpc.com
+      - LETSENCRYPT_HOST=api-xercisdev.theworkpc.com
+      - VIRTUAL_PORT=80
+      - API_URL=${API_URL}
+    env_file: .env
+    # This tells Nginx to just pass traffic to the other VM
+    command: /bin/sh -c "echo 'server { listen 80; location / { proxy_pass ${API_URL}; proxy_set_header Host \$$host; } }' > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    restart: always
+
 volumes: 
   certs-fe: 
   vhost-fe: 
