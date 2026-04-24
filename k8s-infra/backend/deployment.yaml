@@ -14,15 +14,15 @@ spec:
     spec:
       containers:
         - name: gin-backend
-          image: your-dockerhub/gin-api
+          image: ghcr.io/aonoexercist/gin-api-backend:latest
           ports:
             - containerPort: 8080
           env:
             - name: DB_HOST
               value: postgres
             - name: DB_USER
-              value: user
+              value: postgres
             - name: DB_PASSWORD
-              value: password
+              value: postgres
             - name: DB_NAME
-              value: mydb
+              value: db
