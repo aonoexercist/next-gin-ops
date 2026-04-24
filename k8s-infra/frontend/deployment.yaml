@@ -14,9 +14,11 @@ spec:
     spec:
       containers:
         - name: nextjs
-          image: your-dockerhub/nextjs-app
+          image: ghcr.io/aonoexercist/next-gin-frontend:latest
           ports:
             - containerPort: 3000
           env:
             - name: NEXT_PUBLIC_API_URL
               value: http://gin-backend:8080
+            - name: NEXT_PUBLIC_GOOGLE_CLIENT_ID
+              value: 305742023400-1eor04p99qkbs5o1q0d3ggkg97jqour2.apps.googleusercontent.com
