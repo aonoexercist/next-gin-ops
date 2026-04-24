@@ -26,3 +26,9 @@ spec:
               value: postgres
             - name: DB_NAME
               value: db
+            - name: DB_PORT
+              value: "5432"
+            - name: JWT_SECRET
+              value: COKwHA1gqG6DXyOHHKzxPxOZk6tDA7pToJuG5qVDGEo
+            - name: GOOGLE_CLIENT_ID
+              value: 305742023400-1eor04p99qkbs5o1q0d3ggkg97jqour2.apps.googleusercontent.com
